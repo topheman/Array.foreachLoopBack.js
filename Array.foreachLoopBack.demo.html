@@ -1,0 +1,83 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Array.foreachLoopBack - Demo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="./Array.foreachLoopBack.js" type="text/javascript"></script>
+        <style>
+            body    {font-family: courier;font-size:0.9em;}
+            .result {font-weight: bold;}
+        </style>
+    </head>
+    <body>
+        <p>View source on github.</p>
+        <p>original array : [<span id="original-array"></span>]</p>
+        <hr />
+        <p>
+            //conventional use (as if it was a for or for as loop)
+            <br>test.foreachLoopBack(function(elem){document.getElementById('conventional').innerHTML += elem});
+        </p>
+        <p id="conventional" class="result"></p>
+        <p>
+            //same but <strong>reverse</strong> (note the <strong>true</strong> in second argument)
+            <br>test.foreachLoopBack(function(elem){document.getElementById('conventional-reverse').innerHTML += elem}, <strong>true</strong>);
+        </p>
+        <p id="conventional-reverse" class="result"></p>
+        <hr />
+        <p>
+            //from index 3 - this will loopback at the end of the array if no indexStop specified
+            <br>test.foreachLoopBack(function(elem){document.getElementById('from-3').innerHTML += elem}, false,<strong>3</strong>);
+        </p>
+        <p id="from-3" class="result"></p>
+        <p>
+            //from index 3 - same as before, but <strong>reverse</strong>
+            <br>test.foreachLoopBack(function(elem){document.getElementById('from-3-reverse').innerHTML += elem}, <strong>true</strong>,3);
+        </p>
+        <p id="from-3-reverse" class="result"></p>
+        <hr />
+        <p>
+            //from index 3 to <strong>index 8</strong>
+            <br>test.foreachLoopBack(function(elem){document.getElementById('from-3-to-8').innerHTML += elem}, false,3,<strong>8</strong>);
+        </p>
+        <p id="from-3-to-8" class="result"></p>
+        <p>
+            //from index 3 to index 8 - <strong>reversed</strong>
+            <br>test.foreachLoopBack(function(elem){document.getElementById('from-3-to-8-reverse').innerHTML += elem}, <strong>true</strong>,3,8);
+        </p>
+        <p id="from-3-to-8-reverse" class="result"></p>
+        <hr />
+        <p>
+            //from <strong>index 8 to index 3</strong> - will loopback at the end of the array
+            <br>test.foreachLoopBack(function(elem){document.getElementById('from-8-to-3').innerHTML += elem}, false,<strong>8,3</strong>);
+        </p>
+        <p id="from-8-to-3" class="result"></p>
+        <p>
+            //from index 8 to index 3 - reversed
+            <br>test.foreachLoopBack(function(elem){document.getElementById('from-8-to-3-reverse').innerHTML += elem}, <strong>true</strong>,8,3);
+        </p>
+        <p id="from-8-to-3-reverse" class="result"></p>
+    </body>
+</html>
+<script>
+    var test = [
+        'a','b','c','d','e','f','g','h','i','j'
+    ];
+    //simply display the test array in the dom
+    document.getElementById('original-array').innerHTML = "'"+test.join("','")+"'";
+    //conventional use (as if it was a for or for as loop)
+    test.foreachLoopBack(function(elem){document.getElementById('conventional').innerHTML += elem});//outputs : abcdefghij
+    //same but reverse
+    test.foreachLoopBack(function(elem){document.getElementById('conventional-reverse').innerHTML += elem}, true);//outputs : jihgfedcba
+    //from index 3 - this will loopback at the end of the array if no indexStop specified
+    test.foreachLoopBack(function(elem){document.getElementById('from-3').innerHTML += elem}, false,3);//outputs : defghijabc
+    //same but reverse
+    test.foreachLoopBack(function(elem){document.getElementById('from-3-reverse').innerHTML += elem}, true,3);//outputs : cbajihgfed
+    //from index 3 to index 8
+    test.foreachLoopBack(function(elem){document.getElementById('from-3-to-8').innerHTML += elem}, false,3,8);//outputs : defghi
+    //from index 3 to index 8 - reversed
+    test.foreachLoopBack(function(elem){document.getElementById('from-3-to-8-reverse').innerHTML += elem}, true,3,8);//outputs : ihgfed
+    //from index 8 to index 3 - will loopback at the end of the array
+    test.foreachLoopBack(function(elem){document.getElementById('from-8-to-3').innerHTML += elem}, false,8,3);//outputs : ijabcd
+    //from index 8 to index 3 - reversed
+    test.foreachLoopBack(function(elem){document.getElementById('from-8-to-3-reverse').innerHTML += elem}, true,8,3);//outputs : dcbaji
+</script>
